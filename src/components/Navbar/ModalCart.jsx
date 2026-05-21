@@ -137,29 +137,29 @@ const ModalCart = () => {
                                 <span>${total}</span>
                             </div>
                         </div>
-                        <div className="modal-action mt-4 gap-2 flex flex-col lg:flex-row lg:justify-between">
-                            <button
-                                onClick={() => setShowConfirm(true)}
-                                disabled={loading}
-                                className="btn btn-error"
-                            >
-                                Vaciar carrito
-                            </button>
-                            <Link
-                                className="btn btn-info"
-                                onClick={closeModal}
-                                to="/"
-                            >
-                                Seguir comprando
-                            </Link>
-                            <Link
-                                className="btn btn-primary"
-                                onClick={closeModal}
-                                to="/checkout"
-                            >
-                                Proceder al pago
-                            </Link>
-                        </div>
+                <div className="modal-action mt-4 gap-2 flex flex-col sm:flex-row sm:flex-wrap">
+                    <button
+                        onClick={() => setShowConfirm(true)}
+                        disabled={loading}
+                        className="btn btn-error btn-sm sm:btn-md"
+                    >
+                        Vaciar carrito
+                    </button>
+                    <Link
+                        className="btn btn-info btn-sm sm:btn-md"
+                        onClick={closeModal}
+                        to="/"
+                    >
+                        Seguir comprando
+                    </Link>
+                    <Link
+                        className="btn btn-primary btn-sm sm:btn-md"
+                        onClick={closeModal}
+                        to="/checkout"
+                    >
+                        Proceder al pago
+                    </Link>
+                </div>
                     </>
                 )}
             </section>

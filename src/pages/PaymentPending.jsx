@@ -19,7 +19,7 @@ const PaymentPending = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200">
-            <div className="max-w-md w-full bg-base-100 rounded-lg shadow-xl p-8 text-center">
+            <div className="max-w-md w-full bg-base-100 rounded-xl shadow-sm border border-base-200 p-6 sm:p-8 text-center">
                 <div className="mb-6">
                     <FaClock className="text-6xl text-warning mx-auto mb-4" />
                     <h1 className="text-3xl font-bold text-warning mb-2">

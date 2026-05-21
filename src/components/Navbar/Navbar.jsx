@@ -10,16 +10,16 @@ const Navbar = () => {
     console.log(loading) */
     return (
         <header className="relative z-40">
-            <AuthButtons />
-            <nav className="navbar bg-base-100 shadow-sm lg:rounded-box w-full">
+            {!loading && !userInfo?.username && <AuthButtons />}
+            <nav className="navbar bg-base-100 shadow-sm lg:rounded-box w-full min-h-12 sm:min-h-16">
                 <div className="navbar-start">
-                    <Link className="btn btn-ghost text-xl" to="/">
+                    <Link className="btn btn-ghost text-lg sm:text-xl" to="/">
                         E-comerce
                     </Link>
                 </div>
-                <div className="navbar-end gap-3">
+                <div className="navbar-end gap-1 sm:gap-3">
                     {userInfo?.isAdmin && (
-                        <Link className="btn btn-primary" to="/admin/dashboard">
+                        <Link className="btn btn-primary btn-sm sm:btn-md" to="/admin/dashboard">
                             Dashboard
                         </Link>
                     )}
