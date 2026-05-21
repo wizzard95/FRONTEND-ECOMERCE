@@ -18,7 +18,11 @@ const UserDropDown = () => {
 
     return (
         <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost avatar">
+            <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost text-center avatar"
+            >
                 <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold hidden lg:block">
                         {userInfo?.username}
