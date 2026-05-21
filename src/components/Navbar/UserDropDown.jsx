@@ -21,7 +21,7 @@ const UserDropDown = () => {
             <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost text-center avatar"
+                className="btn btn-ghost text-center"
             >
                 <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold hidden lg:block">
