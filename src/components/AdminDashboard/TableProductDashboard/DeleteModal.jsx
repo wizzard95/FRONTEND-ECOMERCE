@@ -14,13 +14,15 @@ const DeleteModal = ({ isOpen, onClose, onConfirm, productName }) => {
     return (
         <dialog ref={dialogRef} className="modal" onClose={onClose}>
             <div className="modal-box">
-                <h3 className="font-bold text-lg">Confirmar eliminación</h3>
-                <p className="py-4">
-                    ¿Estás seguro de que deseas eliminar el producto{' '}
-                    <strong>{productName}</strong>? Esta acción no se puede
-                    deshacer.
+                <h3 className="font-bold text-lg">Eliminar producto</h3>
+                <p className="py-4 text-base-content/70">
+                    ¿Estás seguro de que deseas eliminar{' '}
+                    <span className="font-semibold text-base-content">
+                        {productName}
+                    </span>
+                    ? Esta acción no se puede deshacer.
                 </p>
-                <div className="modal-action justify-center">
+                <div className="modal-action">
                     <button className="btn btn-ghost" onClick={onClose}>
                         Cancelar
                     </button>

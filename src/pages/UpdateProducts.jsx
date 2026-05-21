@@ -12,12 +12,17 @@ const UpdateProduct = () => {
     }, [id, getProductById])
 
     return (
-        <div>
-            <h1 className="text-3xl font-bold text-center my-10">
-                Actualizar Producto
-            </h1>
+        <div className="max-w-2xl mx-auto">
+            <div className="mb-8">
+                <h1 className="text-2xl font-bold">Actualizar Producto</h1>
+                <p className="text-sm text-base-content/60 mt-1">
+                    Modifica los campos del producto seleccionado
+                </p>
+            </div>
             {productLoading ? (
-                <div className="loading loading-spinner"></div>
+                <div className="flex justify-center py-16">
+                    <span className="loading loading-spinner loading-lg"></span>
+                </div>
             ) : (
                 <UpdateProductForm product={product} />
             )}

@@ -3,6 +3,60 @@ import { useProduct } from '../../../context/ProductContext'
 import { useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
 
+const fields = [
+    {
+        name: 'name',
+        label: 'Nombre',
+        placeholder: 'Nombre del producto',
+        type: 'text',
+        validation: {
+            required: 'El nombre es requerido',
+            minLength: { value: 3, message: 'Mínimo 3 caracteres' },
+            maxLength: { value: 50, message: 'Máximo 50 caracteres' },
+        },
+    },
+    {
+        name: 'description',
+        label: 'Descripción',
+        placeholder: 'Descripción del producto',
+        type: 'text',
+        validation: {
+            required: 'La descripción es requerida',
+            minLength: { value: 10, message: 'Mínimo 10 caracteres' },
+            maxLength: { value: 2000, message: 'Máximo 2000 caracteres' },
+        },
+    },
+    {
+        name: 'price',
+        label: 'Precio',
+        placeholder: '0.00',
+        type: 'number',
+        validation: {
+            required: 'El precio es requerido',
+            min: { value: 1, message: 'Debe ser mayor a 0' },
+        },
+    },
+    {
+        name: 'stock',
+        label: 'Stock',
+        placeholder: '0',
+        type: 'number',
+        validation: {
+            required: 'El stock es requerido',
+            min: { value: 1, message: 'Debe ser mayor a 0' },
+        },
+    },
+    {
+        name: 'imageUrl',
+        label: 'URL de la imagen',
+        placeholder: 'https://ejemplo.com/imagen.jpg',
+        type: 'text',
+        validation: {
+            required: 'La URL de la imagen es requerida',
+        },
+    },
+]
+
 const UpdateProductForm = ({ product }) => {
     const { updateProduct } = useProduct()
     const navigate = useNavigate()
@@ -10,7 +64,7 @@ const UpdateProductForm = ({ product }) => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isValid },
         reset,
     } = useForm({ mode: 'onChange', defaultValues: product })
 
@@ -28,149 +82,54 @@ const UpdateProductForm = ({ product }) => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-8 flex flex-col gap-4 lg:gap-6 max-w-[500px] mx-auto"
+            className="max-w-lg mx-auto space-y-5"
         >
-            <div>
-                <input
-                    {...register('name', {
-                        required: 'El nombre es requerido',
-                        minLength: {
-                            value: 3,
-                            message: 'Mínimo 3 caracteres',
-                        },
-                        maxLength: {
-                            value: 50,
-                            message: 'Máximo 50 caracteres',
-                        },
-                    })}
-                    className={`p-2 outline-2 rounded border focus:outline-primary w-full
-                        ${
-                            errors.name
-                                ? 'border-r-red-500 outline-red-500 focus:outline-red-500'
-                                : ''
-                        }`}
-                    type="text"
-                    placeholder="Nombre"
-                    name="name"
-                    autoComplete="name"
-                />
-                {errors.name && (
-                    <p className="text-red-400 text-sm mt-2 ml-1">
-                        {errors.name.message}
-                    </p>
-                )}
+            <div className="bg-base-100 rounded-xl shadow-sm border border-base-200 p-6 space-y-5">
+                {fields.map((field) => (
+                    <div key={field.name}>
+                        <label className="label">
+                            <span className="label-text font-medium">
+                                {field.label}
+                            </span>
+                        </label>
+                        <input
+                            {...register(field.name, {
+                                ...field.validation,
+                                ...(field.type === 'number' && {
+                                    valueAsNumber: true,
+                                }),
+                            })}
+                            type={field.type}
+                            placeholder={field.placeholder}
+                            className={`input input-bordered w-full ${
+                                errors[field.name] ? 'input-error' : ''
+                            }`}
+                        />
+                        {errors[field.name] && (
+                            <p className="text-error text-sm mt-1.5">
+                                {errors[field.name].message}
+                            </p>
+                        )}
+                    </div>
+                ))}
             </div>
-            <div>
-                <input
-                    {...register('description', {
-                        required: 'La descripcion es requerida',
-                        minLength: {
-                            value: 10,
-                            message: 'Mínimo 10 caracteres',
-                        },
-                        maxLength: {
-                            value: 2000,
-                            message: 'Máximo 2000 caracteres',
-                        },
-                    })}
-                    className={`p-2 outline-2 rounded border focus:outline-primary w-full
-                        ${
-                            errors.description
-                                ? 'border-r-red-500 outline-red-500 focus:outline-red-500'
-                                : ''
-                        }`}
-                    type="text"
-                    placeholder="Descripción"
-                    name="description"
-                    autoComplete="description"
-                />
-                {errors.description && (
-                    <p className="text-red-400 text-sm mt-2 ml-1">
-                        {errors.description.message}
-                    </p>
-                )}
+
+            <div className="flex gap-3 justify-end">
+                <button
+                    type="button"
+                    className="btn btn-ghost"
+                    onClick={() => navigate('/admin/dashboard/products')}
+                >
+                    Cancelar
+                </button>
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={!isValid}
+                >
+                    Actualizar Producto
+                </button>
             </div>
-            <div>
-                <input
-                    {...register('price', {
-                        required: 'El precio es requerido',
-                        min: {
-                            value: 2,
-                            message: 'El precio deber ser mayor a 1',
-                        },
-                        maxLength: {
-                            value: 254,
-                            message: 'Máximo 254 caracteres',
-                        },
-                    })}
-                    className={`p-2 outline-2 rounded border focus:outline-primary w-full
-                        ${
-                            errors.price
-                                ? 'border-r-red-500 outline-red-500 focus:outline-red-500'
-                                : ''
-                        }`}
-                    type="number"
-                    placeholder="Precio"
-                    name="price"
-                    autoComplete="price"
-                />
-                {errors.price && (
-                    <p className="text-red-400 text-sm mt-2 ml-1">
-                        {errors.price.message}
-                    </p>
-                )}
-            </div>
-            <div>
-                <input
-                    {...register('stock', {
-                        required: 'El stock es requerido',
-                        min: {
-                            value: 1,
-                            message: 'El stock mínimo deber ser mayor a 0',
-                        },
-                    })}
-                    className={`p-2 outline-2 rounded border focus:outline-primary w-full
-                        ${
-                            errors.stock
-                                ? 'border-r-red-500 outline-red-500 focus:outline-red-500'
-                                : ''
-                        }`}
-                    type="number"
-                    placeholder="Stock"
-                    name="stock"
-                    autoComplete="stock"
-                />
-                {errors.stock && (
-                    <p className="text-red-400 text-sm mt-2 ml-1">
-                        {errors.stock.message}
-                    </p>
-                )}
-            </div>
-            <div>
-                <input
-                    {...register('imageUrl', {
-                        required: 'La URL de la imagen es requerida',
-                    })}
-                    className={`p-2 outline-2 rounded border focus:outline-primary w-full
-                        ${
-                            errors.imageUrl
-                                ? 'border-r-red-500 outline-red-500 focus:outline-red-500'
-                                : ''
-                        }`}
-                    type="text"
-                    placeholder="Imagen"
-                    name="imageUrl"
-                    autoComplete="imageUrl"
-                />
-                {errors.imageUrl && (
-                    <p className="text-red-400 text-sm mt-2 ml-1">
-                        {errors.imageUrl.message}
-                    </p>
-                )}
-            </div>
-            <button className="btn btn-primary" type="submit">
-                Actualizar Producto
-            </button>
         </form>
     )
 }

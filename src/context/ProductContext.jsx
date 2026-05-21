@@ -24,7 +24,10 @@ export const ProductContextProvider = ({ children }) => {
     const getProducts = useCallback(async () => {
         try {
             const response = await axios.get(API_URL)
-            setProducts(response.data)
+            const data = Array.isArray(response.data)
+                ? response.data
+                : response.data?.products || response.data?.data || []
+            setProducts(data)
         } catch (error) {
             setError(error.message || 'Error al obtener los productos')
         } finally {
@@ -58,10 +61,15 @@ export const ProductContextProvider = ({ children }) => {
                 }
             }
         } catch (error) {
-            setError(error.message || 'Error al actualizar el producto')
+            const serverMsg =
+                error.response?.data?.message ||
+                error.response?.data?.error ||
+                error.message ||
+                'Error al actualizar el producto'
+            setError(serverMsg)
             return {
                 success: false,
-                message: 'Error al actualizar el producto',
+                message: serverMsg,
             }
         } finally {
             setproductsLoading(false)
@@ -93,10 +101,15 @@ export const ProductContextProvider = ({ children }) => {
                 }
             }
         } catch (error) {
-            setError(error.message || 'Error al crear el producto')
+            const serverMsg =
+                error.response?.data?.message ||
+                error.response?.data?.error ||
+                error.message ||
+                'Error al crear el producto'
+            setError(serverMsg)
             return {
                 success: false,
-                message: error.message || 'Error al crear el producto',
+                message: serverMsg,
             }
         } finally {
             setProductLoading(false)

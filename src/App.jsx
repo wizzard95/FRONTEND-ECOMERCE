@@ -48,19 +48,19 @@ function App() {
                                 path="/payment/pending"
                                 element={<PaymentPending />}
                             ></Route>
-                            <Route
-                                path="/admin/dashboard/*"
-                                element={
-                                    <ProtectedRoute>
-                                        <AdminDashboard />
-                                    </ProtectedRoute>
-                                }
-                            />
                         </Route>
+                        <Route
+                            path="/admin/dashboard/*"
+                            element={
+                                <ProtectedRoute>
+                                    <AdminDashboard />
+                                </ProtectedRoute>
+                            }
+                        />
                     </Routes>
+                    <Toaster />
                 </CartContextProvider>
             </ProductContextProvider>
-            <Toaster />
         </UserContextProvider>
     )
 }
