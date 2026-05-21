@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
 import { useProduct } from '../../../context/ProductContext'
 import toast from 'react-hot-toast'
+import DeleteModal from './DeleteModal'
 
 const TableProducts = ({ products }) => {
     const { deleteProduct } = useProduct()
+    const [productToDelete, setProductToDelete] = useState(null)
 
     const onHandleDelete = async (id) => {
         const result = await deleteProduct(id)
+        setProductToDelete(null)
 
         if (result.success) {
             toast.success(result.message)
@@ -49,7 +53,7 @@ const TableProducts = ({ products }) => {
                         <td>
                             <button
                                 className="btn btn-error"
-                                onClick={() => onHandleDelete(product._id)}
+                                onClick={() => setProductToDelete(product)}
                             >
                                 Delete
                             </button>
@@ -57,6 +61,13 @@ const TableProducts = ({ products }) => {
                     </tr>
                 ))}
             </tbody>
+
+            <DeleteModal
+                isOpen={!!productToDelete}
+                onClose={() => setProductToDelete(null)}
+                onConfirm={() => onHandleDelete(productToDelete._id)}
+                productName={productToDelete?.name}
+            />
         </table>
     )
 }
