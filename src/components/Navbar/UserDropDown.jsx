@@ -37,7 +37,7 @@ const UserDropDown = () => {
             </div>
             <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 w-52 p-2 shadow"
             >
                 <li className="menu-header px-4 py-2 text-sm font-semibold text-base-content/70 pointer-events-none">
                     {userInfo?.username}

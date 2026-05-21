@@ -9,7 +9,7 @@ const Navbar = () => {
     /* console.log(userInfo)
     console.log(loading) */
     return (
-        <header>
+        <header className="relative z-40">
             <AuthButtons />
             <nav className="navbar bg-base-100 shadow-sm lg:rounded-box w-full">
                 <div className="navbar-start">
