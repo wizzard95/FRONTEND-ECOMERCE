@@ -6,15 +6,29 @@ const Home = () => {
 
     return (
         <div>
-            {/* <h1 className="text-4xl font-bold text-center mt-7 mb-2 text-purple-700 uppercase">
-                Mi Ecomerce
-            </h1> */}
-            <p className="text-center mb-4">Elige tu producto ⬇️</p>
+            <div className="text-center py-6 sm:py-10">
+                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
+                    Nuestros Productos
+                </h1>
+                <p className="text-base-content/60 mt-2 text-sm sm:text-base">
+                    Encuentra la taza perfecta para cada ocasión
+                </p>
+            </div>
+
             <div className="flex flex-wrap gap-5 justify-center">
                 {productsLoading ? (
-                    <div className="loading loading-spinner"></div>
+                    <div className="w-full flex justify-center py-16">
+                        <span className="loading loading-spinner loading-lg"></span>
+                    </div>
                 ) : error ? (
-                    <p>Error al cargar los productos</p>
+                    <div className="w-full text-center py-16 text-base-content/50">
+                        <p className="text-lg">Error al cargar los productos</p>
+                        <p className="text-sm mt-1">Intenta nuevamente más tarde</p>
+                    </div>
+                ) : products.length === 0 ? (
+                    <div className="w-full text-center py-16 text-base-content/50">
+                        <p className="text-lg">No hay productos disponibles</p>
+                    </div>
                 ) : (
                     products.map((product) => (
                         <CardProduct key={product._id} product={product} />
