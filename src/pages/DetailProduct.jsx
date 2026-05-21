@@ -22,31 +22,21 @@ const DetailProduct = () => {
     return (
         <>
             {productLoading ? (
-                <div className="flex justify-center py-16">
-                    <span className="loading loading-spinner loading-lg"></span>
-                </div>
+                <div className="loading loading-spinner"></div>
             ) : (
-                <div className="mt-4 sm:mt-6 flex flex-col md:flex-row gap-4 sm:gap-8">
+                <div className="mt-6 md:flex">
                     <div className="md:w-1/2">
-                        <img
-                            className="w-full rounded-xl object-cover aspect-square"
-                            src={product.imageUrl}
-                            alt={product.name}
-                        />
+                        <img src={product.imageUrl} alt={product.name} />
                     </div>
-                    <section className="flex flex-col gap-4 sm:gap-5 md:w-1/2">
-                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold">
-                            {product.name}
-                        </h1>
-                        <p className="text-lg sm:text-xl badge badge-warning py-3 sm:py-4 px-4 font-bold w-fit">
-                            ${product.price}
+                    <section className="flex flex-col gap-5 pt-2 md:pt-0 md:pl-0 md:w-1/2">
+                        <h1 className="text-5xl font-bold">{product.name}</h1>
+                        <p className="text-xl badge badge-warning p-4 font-bold">
+                            {product.price}
                         </p>
-                        <p className="text-sm sm:text-base text-base-content/70 leading-relaxed">
-                            {product.description}
-                        </p>
+                        <p className="text-lg">{product.description}</p>
                         <button
                             onClick={handleAddToCart}
-                            className="btn btn-success mt-2 md:mt-auto btn-md sm:btn-lg"
+                            className="btn btn-success mt-2 md:mt-auto md:btn-lg"
                         >
                             Agregar al carrito
                         </button>

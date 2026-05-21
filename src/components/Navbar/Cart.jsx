@@ -17,7 +17,7 @@ const Cart = () => {
                     <div
                         tabIndex={0}
                         role="button"
-                        className="btn btn-success btn-circle btn-sm sm:btn-md"
+                        className="btn btn-success btn-circle"
                     >
                         <div className="indicator">
                             <svg

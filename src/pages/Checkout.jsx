@@ -97,25 +97,22 @@ const Checkout = () => {
     }
 
     return (
-        <div className="px-0 sm:px-4 py-4 sm:py-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8">Checkout</h1>
+        <div className="container mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold text-center mb-8">Checkout</h1>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Formulario de envío */}
-                <div className="bg-base-100 p-4 sm:p-6 rounded-xl shadow-sm border border-base-200">
-                    <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
+                <div className="bg-base-100 p-6 rounded-lg shadow-lg">
+                    <h2 className="text-2xl font-semibold mb-6">
                         Información de Envío
                     </h2>
 
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="flex flex-col gap-3 sm:gap-4"
+                        className="flex flex-col gap-4 lg:gap-6"
                     >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                             <div>
-                                <label className="label py-1">
-                                    <span className="label-text">Nombre</span>
-                                </label>
                                 <input
                                     {...register('firstName', {
                                         required: 'El nombre es requerido',
@@ -132,24 +129,23 @@ const Checkout = () => {
                                             message: 'Solo se permiten letras',
                                         },
                                     })}
-                                    className={`input input-bordered w-full ${
-                                        errors.firstName ? 'input-error' : ''
+                                    className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                        errors.firstName
+                                            ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                            : ''
                                     }`}
                                     type="text"
-                                    placeholder="Nombre"
+                                    placeholder="Nombre *"
                                     autoComplete="given-name"
                                 />
                                 {errors.firstName && (
-                                    <p className="text-error text-sm mt-1.5">
+                                    <p className="text-red-500 text-sm mt-2 ml-1">
                                         {errors.firstName.message}
                                     </p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="label py-1">
-                                    <span className="label-text">Apellido</span>
-                                </label>
                                 <input
                                     {...register('lastName', {
                                         required: 'El apellido es requerido',
@@ -166,15 +162,17 @@ const Checkout = () => {
                                             message: 'Solo se permiten letras',
                                         },
                                     })}
-                                    className={`input input-bordered w-full ${
-                                        errors.lastName ? 'input-error' : ''
+                                    className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                        errors.lastName
+                                            ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                            : ''
                                     }`}
                                     type="text"
-                                    placeholder="Apellido"
+                                    placeholder="Apellido *"
                                     autoComplete="family-name"
                                 />
                                 {errors.lastName && (
-                                    <p className="text-error text-sm mt-1.5">
+                                    <p className="text-red-500 text-sm mt-2 ml-1">
                                         {errors.lastName.message}
                                     </p>
                                 )}
@@ -182,9 +180,6 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                            <label className="label py-1">
-                                <span className="label-text">Email</span>
-                            </label>
                             <input
                                 {...register('email', {
                                     required: 'El email es requerido',
@@ -201,24 +196,23 @@ const Checkout = () => {
                                         message: 'Máximo 254 caracteres',
                                     },
                                 })}
-                                className={`input input-bordered w-full ${
-                                    errors.email ? 'input-error' : ''
+                                className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                    errors.email
+                                        ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                        : ''
                                 }`}
                                 type="email"
-                                placeholder="correo@ejemplo.com"
+                                placeholder="Email *"
                                 autoComplete="email"
                             />
                             {errors.email && (
-                                <p className="text-error text-sm mt-1.5">
+                                <p className="text-red-500 text-sm mt-2 ml-1">
                                     {errors.email.message}
                                 </p>
                             )}
                         </div>
 
                         <div>
-                            <label className="label py-1">
-                                <span className="label-text">Teléfono</span>
-                            </label>
                             <input
                                 {...register('phone', {
                                     required: 'El teléfono es requerido',
@@ -235,25 +229,24 @@ const Checkout = () => {
                                         message: 'Máximo 20 caracteres',
                                     },
                                 })}
-                                className={`input input-bordered w-full ${
-                                    errors.phone ? 'input-error' : ''
+                                className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                    errors.phone
+                                        ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                        : ''
                                 }`}
                                 type="tel"
-                                placeholder="+56 9 1234 5678"
+                                placeholder="Teléfono * (Ej: 1123456789)"
                                 autoComplete="tel"
                             />
                             {errors.phone && (
-                                <p className="text-error text-sm mt-1.5">
+                                <p className="text-red-500 text-sm mt-2 ml-1">
                                     {errors.phone.message}
                                 </p>
                             )}
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                            <div className="sm:col-span-2">
-                                <label className="label py-1">
-                                    <span className="label-text">Calle</span>
-                                </label>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+                            <div className="md:col-span-2">
                                 <input
                                     {...register('street', {
                                         required: 'La calle es requerida',
@@ -266,24 +259,23 @@ const Checkout = () => {
                                             message: 'Máximo 100 caracteres',
                                         },
                                     })}
-                                    className={`input input-bordered w-full ${
-                                        errors.street ? 'input-error' : ''
+                                    className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                        errors.street
+                                            ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                            : ''
                                     }`}
                                     type="text"
-                                    placeholder="Calle"
+                                    placeholder="Calle *"
                                     autoComplete="address-line1"
                                 />
                                 {errors.street && (
-                                    <p className="text-error text-sm mt-1.5">
+                                    <p className="text-red-500 text-sm mt-2 ml-1">
                                         {errors.street.message}
                                     </p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="label py-1">
-                                    <span className="label-text">Número</span>
-                                </label>
                                 <input
                                     {...register('number', {
                                         required: 'El número es requerido',
@@ -297,26 +289,25 @@ const Checkout = () => {
                                             message: 'Máximo 10 caracteres',
                                         },
                                     })}
-                                    className={`input input-bordered w-full ${
-                                        errors.number ? 'input-error' : ''
+                                    className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                        errors.number
+                                            ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                            : ''
                                     }`}
                                     type="text"
-                                    placeholder="Número"
+                                    placeholder="Número *"
                                     autoComplete="address-line2"
                                 />
                                 {errors.number && (
-                                    <p className="text-error text-sm mt-1.5">
+                                    <p className="text-red-500 text-sm mt-2 ml-1">
                                         {errors.number.message}
                                     </p>
                                 )}
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                             <div>
-                                <label className="label py-1">
-                                    <span className="label-text">Ciudad</span>
-                                </label>
                                 <input
                                     {...register('city', {
                                         required: 'La ciudad es requerida',
@@ -333,24 +324,23 @@ const Checkout = () => {
                                             message: 'Solo se permiten letras',
                                         },
                                     })}
-                                    className={`input input-bordered w-full ${
-                                        errors.city ? 'input-error' : ''
+                                    className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                        errors.city
+                                            ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                            : ''
                                     }`}
                                     type="text"
-                                    placeholder="Ciudad"
+                                    placeholder="Ciudad *"
                                     autoComplete="address-level2"
                                 />
                                 {errors.city && (
-                                    <p className="text-error text-sm mt-1.5">
+                                    <p className="text-red-500 text-sm mt-2 ml-1">
                                         {errors.city.message}
                                     </p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="label py-1">
-                                    <span className="label-text">Provincia</span>
-                                </label>
                                 <input
                                     {...register('state', {
                                         required: 'La provincia es requerida',
@@ -367,15 +357,17 @@ const Checkout = () => {
                                             message: 'Solo se permiten letras',
                                         },
                                     })}
-                                    className={`input input-bordered w-full ${
-                                        errors.state ? 'input-error' : ''
+                                    className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                        errors.state
+                                            ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                            : ''
                                     }`}
                                     type="text"
-                                    placeholder="Provincia"
+                                    placeholder="Provincia *"
                                     autoComplete="address-level1"
                                 />
                                 {errors.state && (
-                                    <p className="text-error text-sm mt-1.5">
+                                    <p className="text-red-500 text-sm mt-2 ml-1">
                                         {errors.state.message}
                                     </p>
                                 )}
@@ -383,9 +375,6 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                            <label className="label py-1">
-                                <span className="label-text">Código Postal</span>
-                            </label>
                             <input
                                 {...register('zipCode', {
                                     required: 'El código postal es requerido',
@@ -403,15 +392,17 @@ const Checkout = () => {
                                         message: 'Máximo 10 caracteres',
                                     },
                                 })}
-                                className={`input input-bordered w-full ${
-                                    errors.zipCode ? 'input-error' : ''
+                                className={`p-2 outline-2 border rounded focus:outline-primary w-full ${
+                                    errors.zipCode
+                                        ? 'border-red-400 outline-red-400 focus:outline-red-400'
+                                        : ''
                                 }`}
                                 type="text"
-                                placeholder="1234567"
+                                placeholder="Código Postal *"
                                 autoComplete="postal-code"
                             />
                             {errors.zipCode && (
-                                <p className="text-error text-sm mt-1.5">
+                                <p className="text-red-500 text-sm mt-2 ml-1">
                                     {errors.zipCode.message}
                                 </p>
                             )}
@@ -420,7 +411,7 @@ const Checkout = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn btn-primary w-full mt-4 sm:mt-6"
+                            className="btn btn-primary w-full mt-6"
                         >
                             {loading ? (
                                 <>
@@ -435,40 +426,40 @@ const Checkout = () => {
                 </div>
 
                 {/* Resumen de la orden */}
-                <div className="bg-base-100 p-4 sm:p-6 rounded-xl shadow-sm border border-base-200">
-                    <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
+                <div className="bg-base-100 p-6 rounded-lg shadow-lg">
+                    <h2 className="text-2xl font-semibold mb-6">
                         Resumen de la Orden
                     </h2>
 
-                    <div className="space-y-3 sm:space-y-4">
+                    <div className="space-y-4">
                         {cart.map((item) => (
                             <div
                                 key={item._id}
-                                className="flex justify-between items-center border-b border-base-200 pb-2"
+                                className="flex justify-between items-center border-b pb-2"
                             >
-                                <div className="flex items-center gap-2 sm:gap-3">
+                                <div className="flex items-center space-x-3">
                                     <img
                                         src={item.imageUrl}
                                         alt={item.name}
-                                        className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded"
+                                        className="w-12 h-12 object-cover rounded"
                                     />
                                     <div>
-                                        <h3 className="font-medium text-sm sm:text-base">
+                                        <h3 className="font-medium">
                                             {item.name}
                                         </h3>
-                                        <p className="text-xs sm:text-sm text-base-content/50">
+                                        <p className="text-sm text-gray-500">
                                             Cantidad: {item.quantity || 1}
                                         </p>
                                     </div>
                                 </div>
-                                <span className="font-semibold text-sm sm:text-base">
+                                <span className="font-semibold">
                                     ${item.price * (item.quantity || 1)}
                                 </span>
                             </div>
                         ))}
 
-                        <div className="border-t border-base-200 pt-3 sm:pt-4">
-                            <div className="flex justify-between items-center text-lg sm:text-xl font-bold">
+                        <div className="border-t pt-4">
+                            <div className="flex justify-between items-center text-xl font-bold">
                                 <span>Total:</span>
                                 <span>${total}</span>
                             </div>
