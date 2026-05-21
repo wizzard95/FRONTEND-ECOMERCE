@@ -1,0 +1,33 @@
+import { Link } from 'react-router'
+import { useProduct } from '../../../context/ProductContext'
+import TableProducts from './TableProducts'
+
+const TableProductDashboard = () => {
+    const { products, productsLoading } = useProduct()
+
+    console.log(products, productsLoading)
+
+    return (
+        <>
+            <div className="flex items-center gap-4 justify-center">
+                <h1>Admin Productos</h1>
+                <div>
+                    <Link
+                        to="/admin/dashboard/products/createProduct"
+                        className="btn btn-primary"
+                    >
+                        Crear Producto
+                    </Link>
+                </div>
+            </div>
+            <div className="overflow-x-auto">
+                {productsLoading ? (
+                    <div className="loading loading-spinner"></div>
+                ) : (
+                    <TableProducts products={products} />
+                )}
+            </div>
+        </>
+    )
+}
+export default TableProductDashboard
