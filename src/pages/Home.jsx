@@ -11,7 +11,7 @@ const Home = () => {
                     Nuestros Productos
                 </h1>
                 <p className="text-base-content/60 mt-2 text-sm sm:text-base">
-                    Encuentra la taza perfecta para cada ocasión
+                    {/*  Encuentra la taza perfecta para cada ocasión */}
                 </p>
             </div>
 
@@ -23,7 +23,9 @@ const Home = () => {
                 ) : error ? (
                     <div className="w-full text-center py-16 text-base-content/50">
                         <p className="text-lg">Error al cargar los productos</p>
-                        <p className="text-sm mt-1">Intenta nuevamente más tarde</p>
+                        <p className="text-sm mt-1">
+                            Intenta nuevamente más tarde
+                        </p>
                     </div>
                 ) : products.length === 0 ? (
                     <div className="w-full text-center py-16 text-base-content/50">
