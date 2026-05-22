@@ -6,8 +6,8 @@ const TableProductDashboard = () => {
     const { products, productsLoading } = useProduct()
 
     return (
-        <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="h-full flex flex-col gap-4 md:gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0">
                 <div>
                     <h1 className="text-2xl font-bold">Productos</h1>
                     <p className="text-sm text-base-content/60 mt-1">
@@ -22,7 +22,7 @@ const TableProductDashboard = () => {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 shrink-0">
                 <div className="stat bg-base-100 rounded-xl shadow-sm border border-base-200">
                     <div className="stat-title">Total Productos</div>
                     <div className="stat-value text-2xl">{products.length}</div>
@@ -49,7 +49,7 @@ const TableProductDashboard = () => {
                 </div>
             </div>
 
-            <div className="bg-base-100 rounded-xl shadow-sm border border-base-200 overflow-hidden">
+            <div className="bg-base-100 rounded-xl shadow-sm border border-base-200 overflow-hidden flex-1 flex flex-col min-h-0">
                 {productsLoading ? (
                     <div className="flex justify-center py-16">
                         <span className="loading loading-spinner loading-lg"></span>

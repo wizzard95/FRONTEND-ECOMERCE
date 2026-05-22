@@ -30,10 +30,11 @@ const TableProducts = ({ products }) => {
 
     return (
         <>
-            <div className="overflow-x-auto">
+            <div className="overflow-y-auto flex-1 min-h-0">
+                <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     <thead>
-                        <tr className="bg-base-200">
+                        <tr className="bg-base-200 sticky top-0">
                             <th className="w-12">#</th>
                             <th>Nombre</th>
                             <th className="hidden md:table-cell">Descripción</th>
@@ -91,6 +92,7 @@ const TableProducts = ({ products }) => {
                         ))}
                     </tbody>
                 </table>
+                </div>
             </div>
 
             <DeleteModal

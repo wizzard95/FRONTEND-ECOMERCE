@@ -11,7 +11,7 @@ const DashboardLayout = () => {
     return (
         <div className="drawer lg:drawer-open">
             <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col">
+            <div className="drawer-content flex flex-col h-screen overflow-hidden">
                 <div className="navbar bg-base-100 border-b border-base-200 lg:hidden">
                     <label htmlFor="dashboard-drawer" className="btn btn-ghost drawer-button">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,13 +20,13 @@ const DashboardLayout = () => {
                     </label>
                     <div className="flex-1 text-lg font-semibold">Dashboard</div>
                 </div>
-                <main className="flex-1 p-4 md:p-8 bg-base-200">
+                <main className="flex-1 p-4 md:p-8 bg-base-200 flex flex-col min-h-0">
                     <Outlet />
                 </main>
             </div>
             <div className="drawer-side">
                 <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                <aside className="bg-base-100 min-h-full w-64 border-r border-base-200 flex flex-col">
+                <aside className="bg-base-100 h-screen w-64 border-r border-base-200 flex flex-col sticky top-0">
                     <div className="p-6 border-b border-base-200">
                         <Link to="/admin/dashboard" className="text-xl font-bold tracking-tight">
                             Dashboard

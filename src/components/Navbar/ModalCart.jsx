@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { CgTrash } from 'react-icons/cg'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { useCart } from '../../context/CartContext'
@@ -21,7 +22,7 @@ const ModalCart = () => {
 
     if (!isModalOpen) return null
 
-    return (
+    return createPortal(
         <div className="modal modal-open px-4">
             <section className="modal-box w-full max-w-2xl">
                 <div className="flex justify-between items-center mb-4">
@@ -200,7 +201,8 @@ const ModalCart = () => {
 
             {/*  cerrar el carrito haciendo click fuera del modal */}
             <div className="modal-backdrop" onClick={closeModal}></div>
-        </div>
+        </div>,
+        document.body,
     )
 }
 
