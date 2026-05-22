@@ -10,7 +10,7 @@ const Navbar = () => {
             <nav className="navbar bg-base-100/95 backdrop-blur-sm shadow-sm w-full">
                 <div className="navbar-start">
                     <Link className="btn btn-ghost text-xl" to="/">
-                        E-comerce
+                        meEcomerce
                     </Link>
                 </div>
                 <div className="navbar-end gap-1 sm:gap-3">
@@ -22,7 +22,10 @@ const Navbar = () => {
                             >
                                 Crear Cuenta
                             </Link>
-                            <Link className="btn btn-primary btn-sm" to="/login">
+                            <Link
+                                className="btn btn-primary btn-sm"
+                                to="/login"
+                            >
                                 Iniciar sesión
                             </Link>
                         </>
