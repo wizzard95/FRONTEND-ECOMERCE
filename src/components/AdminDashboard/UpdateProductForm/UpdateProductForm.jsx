@@ -80,14 +80,11 @@ const UpdateProductForm = ({ product }) => {
     }
 
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="max-w-lg mx-auto space-y-5"
-        >
-            <div className="bg-base-100 rounded-xl shadow-sm border border-base-200 p-6 space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto">
+            <div className="bg-base-100 rounded-xl shadow-sm border border-base-200 p-6 space-y-4">
                 {fields.map((field) => (
                     <div key={field.name}>
-                        <label className="label">
+                        <label className="label py-1">
                             <span className="label-text font-medium">
                                 {field.label}
                             </span>
@@ -106,29 +103,28 @@ const UpdateProductForm = ({ product }) => {
                             }`}
                         />
                         {errors[field.name] && (
-                            <p className="text-error text-sm mt-1.5">
+                            <p className="text-error text-sm mt-1">
                                 {errors[field.name].message}
                             </p>
                         )}
                     </div>
                 ))}
-            </div>
-
-            <div className="flex gap-3 justify-end">
-                <button
-                    type="button"
-                    className="btn btn-ghost"
-                    onClick={() => navigate('/admin/dashboard/products')}
-                >
-                    Cancelar
-                </button>
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={!isValid}
-                >
-                    Actualizar Producto
-                </button>
+                <div className="flex gap-3 justify-end pt-2">
+                    <button
+                        type="button"
+                        className="btn btn-ghost"
+                        onClick={() => navigate('/admin/dashboard/products')}
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={!isValid}
+                    >
+                        Actualizar Producto
+                    </button>
+                </div>
             </div>
         </form>
     )
