@@ -23,161 +23,150 @@ const ModalCart = () => {
     if (!isModalOpen) return null
 
     return createPortal(
-        <div className="modal modal-open px-4">
-            <section className="modal-box w-full max-w-2xl">
-                <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-bold text-lg">Carrito de compras</h3>
-                    <button
-                        onClick={closeModal}
-                        className="btn btn-sm btn-circle btn-ghost"
-                    >
-                        X
+        <div className="modal modal-open">
+            <div className="modal-box w-full max-w-2xl p-0 overflow-hidden">
+                <div className="flex items-center justify-between p-4 sm:p-6 border-b border-base-200">
+                    <div>
+                        <h3 className="text-lg font-bold">Carrito de compras</h3>
+                        {itemsQuantity > 0 && (
+                            <p className="text-sm text-base-content/50">{itemsQuantity} artículos</p>
+                        )}
+                    </div>
+                    <button onClick={closeModal} className="btn btn-sm btn-circle btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </button>
                 </div>
+
                 {loading ? (
-                    <div className="text-center py-8">
-                        <span className="loading loading-spinner loading-lg"></span>
-                        <p className="text-gray-500 mt-2">
-                            Actualizando carrito
-                        </p>
+                    <div className="flex flex-col items-center py-12 text-base-content/50">
+                        <span className="loading loading-spinner loading-md"></span>
+                        <p className="mt-3 text-sm">Actualizando carrito</p>
                     </div>
                 ) : cart.length === 0 ? (
-                    <div className="text-center py-8">
-                        <p className="text-gray-500">Tu carrito esta vacío</p>
+                    <div className="flex flex-col items-center py-12 text-base-content/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p className="text-sm">Tu carrito está vacío</p>
                     </div>
                 ) : (
                     <>
-                        <div className="space-y-4 max-h-96 flex flex-col gap-4 overflow-y-auto rounded">
+                        <div className="max-h-96 overflow-y-auto p-4 sm:p-6 space-y-3">
                             {cart.map((item) => (
                                 <div
                                     key={item._id}
-                                    className="flex items-center flex-wrap md:flex-row md:items-center gap-4 rounded-lg"
+                                    className="flex items-center gap-3 sm:gap-4 p-3 bg-base-200/50 rounded-xl"
                                 >
                                     <img
-                                        className="w-20 h-20 object-cover aspect-square"
+                                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg"
                                         src={item.imageUrl}
                                         alt={item.name}
                                     />
-                                    <div className="flex-1 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-                                        <div>
-                                            <h4 className="font-semibold">
-                                                {item.name}
-                                            </h4>
-                                            <p className="text-sm text-gray-600">
-                                                {item.price}
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center gap-3 mt-2 md:mt-0">
-                                            <div className="flex items-center rounded-lg">
-                                                <button
-                                                    onClick={async () => {
-                                                        if (item.quantity > 1) {
-                                                            await updateQuantity(
-                                                                item._id,
-                                                                item.quantity -
-                                                                    1,
-                                                            )
-                                                        }
-                                                    }}
-                                                    disabled={
-                                                        loading ||
-                                                        item.quantity <= 1
-                                                    }
-                                                    className="p-2 border rounded"
-                                                >
-                                                    <FaMinus size={12} />
-                                                </button>
-                                                <span className="px-4 py-2 font-medium">
-                                                    {item.quantity}
-                                                </span>
-                                                <button
-                                                    onClick={async () => {
+                                    <div className="flex-1 min-w-0">
+                                        <h4 className="font-medium text-sm sm:text-base truncate">
+                                            {item.name}
+                                        </h4>
+                                        <p className="text-xs sm:text-sm text-base-content/50 mt-0.5">
+                                            ${item.price} c/u
+                                        </p>
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <button
+                                                onClick={async () => {
+                                                    if (item.quantity > 1) {
                                                         await updateQuantity(
                                                             item._id,
-                                                            item.quantity + 1,
+                                                            item.quantity - 1,
                                                         )
-                                                    }}
-                                                    disabled={
-                                                        loading ||
-                                                        item.quantity >=
-                                                            (item.stock || 999)
                                                     }
-                                                    className="p-2 border rounded"
-                                                >
-                                                    <FaPlus size={12} />
-                                                </button>
-                                            </div>
-                                            <span className="font-semibold text-lg">
-                                                ${item.price * item.quantity}
+                                                }}
+                                                disabled={loading || item.quantity <= 1}
+                                                className="btn btn-xs btn-ghost btn-square border border-base-300 disabled:opacity-30"
+                                            >
+                                                <FaMinus size={10} />
+                                            </button>
+                                            <span className="w-6 text-center text-sm font-medium tabular-nums">
+                                                {item.quantity}
                                             </span>
                                             <button
                                                 onClick={async () => {
-                                                    await removeFromCart(
+                                                    await updateQuantity(
                                                         item._id,
+                                                        item.quantity + 1,
                                                     )
                                                 }}
-                                                disabled={loading}
-                                                className="btn btn-ghost btn-sm hover:bg-red-200"
+                                                disabled={loading || item.quantity >= (item.stock || 999)}
+                                                className="btn btn-xs btn-ghost btn-square border border-base-300 disabled:opacity-30"
                                             >
-                                                <CgTrash size={20} />
+                                                <FaPlus size={10} />
                                             </button>
                                         </div>
+                                    </div>
+                                    <div className="flex flex-col items-end gap-2">
+                                        <span className="font-semibold text-sm sm:text-base">
+                                            ${item.price * item.quantity}
+                                        </span>
+                                        <button
+                                            onClick={async () => await removeFromCart(item._id)}
+                                            disabled={loading}
+                                            className="btn btn-xs btn-ghost text-base-content/40 hover:text-error transition-colors"
+                                        >
+                                            <CgTrash size={16} />
+                                        </button>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <div className="border-t pt-4 mt-4">
-                            <div className="flex justify-between items-center mb-2">
-                                <span>Total de artículos</span>
-                                <span className="font-semibold">
-                                    {itemsQuantity}
-                                </span>
+
+                        <div className="border-t border-base-200 p-4 sm:p-6 space-y-3">
+                            <div className="flex justify-between text-sm">
+                                <span className="text-base-content/60">Artículos</span>
+                                <span className="font-medium">{itemsQuantity}</span>
                             </div>
-                            <div className="flex justify-between items-center text-lg font-semibold">
-                                <span>Total:</span>
+                            <div className="flex justify-between text-lg font-bold">
+                                <span>Total</span>
                                 <span>${total}</span>
                             </div>
-                        </div>
-                        <div className="modal-action mt-4 gap-2 flex flex-col lg:flex-row lg:justify-between">
-                            <button
-                                onClick={() => setShowConfirm(true)}
-                                disabled={loading}
-                                className="btn btn-error"
-                            >
-                                Vaciar carrito
-                            </button>
-                            <Link
-                                className="btn btn-info"
-                                onClick={closeModal}
-                                to="/"
-                            >
-                                Seguir comprando
-                            </Link>
-                            <Link
-                                className="btn btn-primary"
-                                onClick={closeModal}
-                                to="/checkout"
-                            >
-                                Proceder al pago
-                            </Link>
+                            <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                                <button
+                                    onClick={() => setShowConfirm(true)}
+                                    disabled={loading}
+                                    className="btn btn-outline btn-sm flex-1 order-2 sm:order-1"
+                                >
+                                    Vaciar carrito
+                                </button>
+                                <Link
+                                    className="btn btn-ghost btn-sm flex-1 order-3 sm:order-2"
+                                    onClick={closeModal}
+                                    to="/"
+                                >
+                                    Seguir comprando
+                                </Link>
+                                <Link
+                                    className="btn btn-primary btn-sm flex-1 order-1 sm:order-3"
+                                    onClick={closeModal}
+                                    to="/checkout"
+                                >
+                                    Proceder al pago
+                                </Link>
+                            </div>
                         </div>
                     </>
                 )}
-            </section>
+            </div>
 
             {showConfirm && (
                 <div className="modal modal-open">
                     <div className="modal-box max-w-sm text-center">
-                        <h3 className="font-bold text-lg mb-2">
-                            Vaciar carrito
-                        </h3>
-                        <p className="text-gray-600 mb-6">
+                        <h3 className="font-bold text-lg mb-2">Vaciar carrito</h3>
+                        <p className="text-base-content/60 mb-6">
                             ¿Estás seguro de que quieres vaciar el carrito?
                         </p>
                         <div className="flex justify-center gap-3">
                             <button
                                 onClick={() => setShowConfirm(false)}
-                                className="btn btn-ghost"
+                                className="btn btn-ghost btn-sm"
                             >
                                 Cancelar
                             </button>
@@ -186,20 +175,16 @@ const ModalCart = () => {
                                     setShowConfirm(false)
                                     await clearCart()
                                 }}
-                                className="btn btn-error"
+                                className="btn btn-error btn-sm"
                             >
                                 Vaciar
                             </button>
                         </div>
                     </div>
-                    <div
-                        className="modal-backdrop"
-                        onClick={() => setShowConfirm(false)}
-                    ></div>
+                    <div className="modal-backdrop" onClick={() => setShowConfirm(false)}></div>
                 </div>
             )}
 
-            {/*  cerrar el carrito haciendo click fuera del modal */}
             <div className="modal-backdrop" onClick={closeModal}></div>
         </div>,
         document.body,

@@ -17,7 +17,7 @@ const Cart = () => {
                     <div
                         tabIndex={0}
                         role="button"
-                        className="btn btn-success btn-circle bg-blue-400 hover:bg-blue-500"
+                        className="btn btn-success bg-blue-400 hover:bg-blue-500"
                     >
                         <div className="indicator">
                             <svg
