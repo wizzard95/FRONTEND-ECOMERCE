@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { loginService } from '../../services/authServices'
 import { useUser } from '../../context/UserContext'
+import { useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
-import { Navigate } from 'react-router'
 
 const LoginForm = () => {
     const {
@@ -13,29 +13,25 @@ const LoginForm = () => {
         formState: { errors },
         reset,
     } = useForm({
-        mode: 'onChange', // ? validacion en tiempo real
+        mode: 'onChange',
     })
 
-    const { setUserInfo, userInfo } = useUser()
+    const { setUserInfo } = useUser()
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
-    const [redirect, setRedirect] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data) => {
-        // ? logueando al usuario
-        const result = await loginService(data, reset, setRedirect, setUserInfo)
+        setLoading(true)
+        const redirect = () => navigate('/')
+        const result = await loginService(data, reset, redirect, setUserInfo)
 
         if (result.succes) {
             toast.success(result.message)
         } else {
             toast.error(result.message)
+            setLoading(false)
         }
-    }
-
-    if (redirect && userInfo.isAdmin) {
-        //return <Navigate to={"/admin/dashboard"}/>
-    }
-    if (redirect && !userInfo.isAdmin) {
-        return <Navigate to={'/'} />
     }
 
     return (
@@ -122,8 +118,16 @@ const LoginForm = () => {
                     </p>
                 )}
             </div>
-            <button className="btn btn-primary" type="submit">
-                Iniciar sesión
+            <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={loading}
+            >
+                {loading ? (
+                    <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                    'Iniciar sesión'
+                )}
             </button>
         </form>
     )

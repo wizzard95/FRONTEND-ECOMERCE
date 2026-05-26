@@ -25,7 +25,7 @@ export const getProfileService = async () => {
     }
 }
 
-export const loginService = async (data, reset, setRedirect, setUserInfo) => {
+export const loginService = async (data, reset, redirect, setUserInfo) => {
     try {
         const response = await axios.post(`${API_URL}/login`, data, {
             headers: { 'Content-Type': 'application/json' },
@@ -36,7 +36,7 @@ export const loginService = async (data, reset, setRedirect, setUserInfo) => {
         if (response.status === 200) {
             setUserInfo(response.data)
             reset()
-            setRedirect(true)
+            redirect()
             return {
                 succes: true,
                 message: 'Inicio de sesión exitoso',
@@ -58,7 +58,7 @@ export const loginService = async (data, reset, setRedirect, setUserInfo) => {
 export const registerService = async (
     data,
     reset,
-    setRedirect,
+    redirect,
     checkSession,
 ) => {
     try {
@@ -78,7 +78,7 @@ export const registerService = async (
             // * Verificar la sesion real del servidor despues del registro
             await checkSession()
             reset()
-            setRedirect(true)
+            redirect()
 
             return {
                 message: true,

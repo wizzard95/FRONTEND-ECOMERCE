@@ -42,7 +42,7 @@ const Navbar = () => {
             <nav className="navbar bg-base-100/95 backdrop-blur-sm shadow-sm w-full">
                 <div className="navbar-start">
                     <Link className="btn btn-ghost text-xl" to="/">
-                        meEcomerce
+                        meEcommerce
                     </Link>
                 </div>
                 <div className="navbar-end gap-1">
@@ -81,32 +81,65 @@ const Navbar = () => {
                     <div className="hidden sm:flex sm:items-center sm:gap-2">
                         {!loading && !userInfo?.username && (
                             <>
-                                <Link className="btn btn-ghost btn-sm" to="/register">
+                                <Link
+                                    className="btn btn-ghost btn-sm"
+                                    to="/register"
+                                >
                                     Crear Cuenta
                                 </Link>
-                                <Link className="btn btn-primary btn-sm" to="/login">
+                                <Link
+                                    className="btn btn-primary btn-sm"
+                                    to="/login"
+                                >
                                     Iniciar sesión
                                 </Link>
                             </>
                         )}
                         {userInfo?.isAdmin && (
-                            <Link className="btn btn-ghost btn-sm" to="/admin/dashboard">
+                            <Link
+                                className="btn btn-ghost btn-sm"
+                                to="/admin/dashboard"
+                            >
                                 Dashboard
                             </Link>
                         )}
                         {!loading && userInfo?.username && (
                             <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="btn btn-ghost">
-                                    <span className="text-sm font-semibold">{userInfo.username}</span>
+                                <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className="btn btn-ghost"
+                                >
+                                    <span className="text-sm font-semibold">
+                                        {userInfo.username}
+                                    </span>
                                 </div>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 w-52 p-2 shadow-lg">
+                                <ul
+                                    tabIndex={0}
+                                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 w-52 p-2 shadow-lg"
+                                >
                                     <li className="menu-header px-4 py-2 text-sm font-semibold text-base-content/70 pointer-events-none">
                                         {userInfo.username}
                                     </li>
                                     <div className="divider my-1"></div>
-                                    <li><a className="justify-between">Perfil</a></li>
-                                    <li><a className="justify-between">Configuración</a></li>
-                                    <li><a onClick={handleLogout} className="justify-between text-error">Cerrar sesión</a></li>
+                                    <li>
+                                        <a className="justify-between">
+                                            Perfil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className="justify-between">
+                                            Configuración
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={handleLogout}
+                                            className="justify-between text-error"
+                                        >
+                                            Cerrar sesión
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         )}
@@ -127,8 +160,19 @@ const Navbar = () => {
                             onClick={() => setMenuOpen(false)}
                             className="btn btn-ghost btn-sm btn-circle"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
                             </svg>
                         </button>
                     </div>

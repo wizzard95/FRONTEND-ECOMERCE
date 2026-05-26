@@ -3,7 +3,7 @@ import { useUser } from '../../context/UserContext'
 import { useForm } from 'react-hook-form'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { registerService } from '../../services/authServices'
-import { Navigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
 
 const RegisterForm = () => {
@@ -13,42 +13,28 @@ const RegisterForm = () => {
         formState: { errors },
         reset,
     } = useForm({
-        mode: 'onChange', // ? validacion en tiempo real
+        mode: 'onChange',
     })
 
-    //* acceso a la informacion del usuario
-    const { userInfo, checkSession } = useUser()
-    //const { userInfo, checkSession } = useContext(UserContext)
+    const { checkSession } = useUser()
+    const navigate = useNavigate()
 
     const [showPassword, setShowPassword] = useState(false)
-
-    const [redirect, setRedirect] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data) => {
-        // ? registrando al usuario
-        /* console.log(data) */
-        const result = await registerService(
-            data,
-            reset,
-            setRedirect,
-            checkSession,
-        )
-        //console.log(result)
+        setLoading(true)
+        const redirect = () => navigate('/')
+        const result = await registerService(data, reset, redirect, checkSession)
+
         if (result.message) {
             toast.success('Registro exitoso')
         } else {
             toast.error('Error, intente mas tarde')
+            setLoading(false)
         }
     }
 
-    if (redirect && userInfo.isAdmin) {
-        // * llevarlo a la pagina admin
-    }
-    if (redirect && !userInfo.isAdmin) {
-        return <Navigate to={'/'} />
-    }
-
-    //console.log(userInfo)
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
@@ -163,8 +149,16 @@ const RegisterForm = () => {
                     </p>
                 )}
             </div>
-            <button className="btn btn-primary" type="submit">
-                Registrarse
+            <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={loading}
+            >
+                {loading ? (
+                    <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                    'Registrarse'
+                )}
             </button>
         </form>
     )
