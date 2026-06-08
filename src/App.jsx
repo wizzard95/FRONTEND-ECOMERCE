@@ -34,7 +34,11 @@ function App() {
                             ></Route>
                             <Route
                                 path="/checkout"
-                                element={<Checkout />}
+                                element={
+                                    <ProtectedRoute requireAdmin={false}>
+                                        <Checkout />
+                                    </ProtectedRoute>
+                                }
                             ></Route>
                             <Route
                                 path="/payment/success"

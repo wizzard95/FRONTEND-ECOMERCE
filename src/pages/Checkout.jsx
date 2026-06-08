@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 
 const Checkout = () => {
     const { cart, total, clearCart, loading: cartLoading } = useCart()
-    const { user } = useUser()
+    const { userInfo: user } = useUser()
     const [loading, setLoading] = useState(false)
 
     const {
